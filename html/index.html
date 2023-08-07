@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- 
+    - primary meta tags
+    -->
+    <title>CinemaSync</title>
+    <meta name="title" content="CinemaSync" />
+    <meta
+      name="description"
+      content="CinemaSync is a popular movie app made by kode_motion"
+    />
+
+    <!-- 
+        - favicon
+     -->
+    <link
+      rel="shortcut icon"
+      href="../assets/favicon.svg"
+      type="image/x-icon"
+    />
+
+    <!-- 
+        - google font link
+      -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- 
+        - custom css link
+     -->
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <!-- 
+        - custom js link
+      -->
+    <script src="../js/global.js" defer></script>
+    <script src="../js/index.js" type="module"></script>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+
+    <header class="header">
+      <a href="../html/index.html" class="logo">
+        <img
+          src="../images/logo.svg"
+          width="140"
+          height="32"
+          alt="CinemaSync"
+        />
+      </a>
+
+      <div class="search_box" search_box>
+        <div class="search_wrapper" search_wrapper>
+          <input
+            type="text"
+            name="search"
+            aria-label="search movies"
+            placeholder="Search any movies ..."
+            class="search_field"
+            autocomplete="off"
+            search_field
+          />
+
+          <img
+            src="../images/search.png"
+            width="24"
+            height="24"
+            alt="search"
+            class="leading_icon"
+          />
+        </div>
+
+        <button class="search_btn" search_toggler>
+          <img
+            src="../images/close.png"
+            width="24"
+            height="24"
+            alt="close search box"
+          />
+        </button>
+      </div>
+
+      <button class="search_btn" search_toggler menu_close>
+        <img
+          src="../images/search.png"
+          width="24"
+          height="24"
+          alt="open search box"
+        />
+      </button>
+
+      <button class="menu_btn" menu_btn menu_toggler>
+        <img
+          src="../images/menu.png"
+          width="24"
+          height="24"
+          alt="open menu"
+          class="menu"
+        />
+        <img
+          src="../images/menu-close.png"
+          width="24"
+          height="24"
+          alt="close menu"
+          class="close"
+        />
+      </button>
+    </header>
+
+    <!-- SIDEBAR -->
+  </body>
+</html>
