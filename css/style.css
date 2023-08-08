@@ -200,7 +200,9 @@ body {
   margin-top: -4.5rem;
   padding: 12px;
 }
-
+.search_btn.close{
+  margin-top: initial;
+}
 .search_btn {
   background-color: var(--banner-background);
   border-radius: var(--radius-8);
@@ -227,6 +229,7 @@ body {
 
 .search_box {
   position: absolute;
+  margin-top: -2.5rem;
   top: 0;
   left: 0;
   width: 100%;
