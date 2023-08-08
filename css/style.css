@@ -169,12 +169,12 @@ body {
     transform: rotate(1turn);
   }
 }
-
 .title {
   font-size: var(--fs-title);
   font-weight: var(--weight-bold);
   letter-spacing: 0.5px;
 }
+
 
 /*-----------------------------------*\
   #HEADER
@@ -200,9 +200,11 @@ body {
   margin-top: -4.5rem;
   padding: 12px;
 }
+
 .search_btn.close {
   margin-top: initial;
 }
+
 .search_btn {
   background-color: var(--banner-background);
   border-radius: var(--radius-8);
@@ -242,7 +244,7 @@ body {
   z-index: 1;
   display: none;
 }
-
+  
 .search_box.active {
   display: flex;
 }
