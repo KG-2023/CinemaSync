@@ -18,9 +18,21 @@
         - favicon
      -->
     <link
-      rel="shortcut icon"
-      href="../assets/favicon.svg"
-      type="image/x-icon"
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../assets/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../assets/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../assets/favicon-16x16.png"
     />
 
     <!-- 
@@ -51,8 +63,9 @@
     <header class="header">
       <a href="../html/index.html" class="logo">
         <img
-          src="../images/logo.svg"
-          width="140"
+          src="../images/cinema_sync.png"
+          width="150"
+
           height="32"
           alt="CinemaSync"
         />
@@ -78,8 +91,8 @@
             class="leading_icon"
           />
         </div>
+        <button class="search_btn close" search_toggler>
 
-        <button class="search_btn" search_toggler>
           <img
             src="../images/close.png"
             width="24"
@@ -117,5 +130,96 @@
     </header>
 
     <!-- SIDEBAR -->
+    
+    <nav class="sidebar" sidebar>
+      <div class="sidebar_inner">
+        <div class="sidebar_list">
+          <p class="title">Genre</p>
+          <a href="./movie-list.html" menu-close class="sidebar_link">Action</a>
+
+          <a href="./movie-list.html" menu-close class="sidebar_link">Horror</a>
+
+          <a href="./movie-list.html" menu-close class="sidebar_link">Comedy</a>
+
+          <a href="./movie-list.html" menu-close class="sidebar_link"
+            >Adventure</a
+          >
+
+          <a href="./movie-list.html" menu-close class="sidebar_link">Drama</a>
+
+          <a href="./movie-list.html" menu-close class="sidebar_link">Sci-Fi</a>
+        </div>
+
+        <div class="sidebar_list">
+          <p class="title">Language</p>
+          <a href="./movie-list.html" menu-close class="sidebar_link"
+            >English</a
+          >
+
+          <a href="./movie-list.html" menu-close class="sidebar_link">Hindi</a>
+
+          <a href="./movie-list.html" menu-close class="sidebar_link"
+            >Bengali</a
+          >
+        </div>
+
+        <div class="sidebar_footer">
+          <p class="copyright">Copyright 2023 kode_motion</p>
+
+          <img
+            src="../images/kode_motion.png"
+            width="110"
+            height="17"
+            alt="the movie database logo"
+          />
+        </div>
+      </div>
+    </nav>
+    <div class="overlay" overlay menu_toggler></div>
+
+    <article class="container" page_content>
+      <!-- BANNER -->
+
+      <section class="banner" aria-label="popular movies">
+        <div class="banner_slider">
+          <div class="slider_item active" slider_item>
+            <img
+              src="../images/slider-banner.jpg"
+              alt="Puss in Boots: The Last Wish"
+              class="img_cover"
+              loading="eager"
+            />
+            <div class="banner_content">
+              <h2 class="heading">Puss in Boots: The Last Wish</h2>
+
+              <div class="meta_list">
+                <div class="meta_item">2022</div>
+                <div class="meta_item card_badge">7.5</div>
+              </div>
+
+              <p class="genre">Animation, Action, Adventure</p>
+              <p class="banner_text">
+                Puss in Boots discovers that his passion for adventure has taken
+                its toll: He has burned through eight of his nine lives, leaving
+                him with only one life left. Puss sets out on an epic journey to
+                find the mythical Last Wish and restore his nine lives.
+              </p>
+
+              <a href="./detail.html" class="btn">
+                <img
+                  src="../images/play_circle.png"
+                  width="24"
+                  height="24"
+                  aria-hidden="true"
+                  alt="play cirlce"
+                />
+
+                <span class="span">Watch Now</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
   </body>
 </html>
