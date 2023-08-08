@@ -190,12 +190,14 @@ body {
   gap: 8px;
 }
 
-.header .log {
+.header .logo {
+  margin-top: -4.5rem;
   margin-inline-end: auto;
 }
 
 .search_btn,
 .menu_btn {
+  margin-top: -4.5rem;
   padding: 12px;
 }
 
@@ -209,8 +211,13 @@ body {
   transition: var(--transition-short);
 }
 
-.search_btn:is(:hover, :focus-visible) {
+.search_btn:is(:hover, :focus-visible) img {
   opacity: 1;
+}
+
+.menu_btn.active .menu,
+.menu_btn .close {
+  display: none;
 }
 
 .menu_btn .menu,
@@ -308,30 +315,41 @@ body {
   padding-block: 36px;
 }
 
-.sidebar::-webkit-scrollbar-thumb {background-color: transparent;}
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
 
 .sidebar:is(:hover, :focus-within) ::-webkit-scrollbar-thumb {
   background-color: var(--banner-background);
 }
 
-.sidebar::-webkit-scrollbar-button {height: 16px;}
+.sidebar::-webkit-scrollbar-button {
+  height: 16px;
+}
 
 .sidebar_list,
-.sidebar_footer {padding-inline: 36px;}
+.sidebar_footer {
+  padding-inline: 36px;
+}
 
 .sidebar_link {
   color: var(--on-surface-variant);
   transition: var(--transition-short);
 }
 
-.sidebar_link:is(:hover, :focus-visible) {color: var(--on-background);}
+.sidebar_link:is(:hover, :focus-visible) {
+  color: var(--on-background);
+}
 
 .sidebar_list {
   display: grid;
   gap: 8px;
 }
 
-.sidebar_list .title {margin-block-end: 8px;}
+.sidebar_list .title {
+  color: aliceblue;
+  margin-block-end: 8px;
+}
 
 .sidebar_footer {
   border-block-start: 1px solid var(--banner-background);
@@ -343,8 +361,6 @@ body {
   color: var(--on-surface-variant);
   margin-block-end: 20px;
 }
-
-.copyright a {display: inline-block;}
 
 .overlay {
   position: fixed;
