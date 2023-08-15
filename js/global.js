@@ -1,20 +1,34 @@
-"use strict";
+'use strict';
 
-/**
- * Add event on multiple elements
- */
+// ! ========== ADD EVENT ON MULTIPLE ELEMENTS ==========
 
 const addEventOnElements = function (elements, eventType, callback) {
-  for (const elem of elements) elem.addEventListener(eventType, callback);
-};
+    elements.forEach((elem) => {
+        elem.addEventListener(eventType, callback);
+    });
+}
+
+// ! ========== TOGGLE SEARCH BOX IN SMALL DEVICES ==========
+
+const searchBox = document.querySelector('[search-box]');
+const searchTogglers = document.querySelectorAll('[search-toggler]');
+addEventOnElements(searchTogglers, 'click', function () {
+    searchBox.classList.toggle('active');
+});
 
 /**
- * Toggle search box in mobile device || small screen
+ * ! store movieId in 'localStorage' when you click any movie card
  */
 
-const searchBox = document.querySelector("[search_box]");
-const searchTogglers = document.querySelectorAll("[search_toggler]");
+const getMovieDetail = function (movieId) {
+    window.localStorage.setItem('movieId', String(movieId));
+}
 
-addEventOnElements(searchTogglers, "click", function () {
-  searchBox.classList.toggle("active");
-});
+/**
+ * ! store urlParam & genreName in 'localStorage' when you click any sidebar link
+ */
+
+const getMovieList = function (urlParam, genreName) {
+    window.localStorage.setItem('urlParam', urlParam);
+    window.localStorage.setItem('genreName', genreName);
+}
