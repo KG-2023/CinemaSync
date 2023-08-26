@@ -23,19 +23,6 @@ export function sidebar() {
     <div class="sidebar-list">
       <p class="title">Genre</p>
     </div>
-
-    <div class="sidebar-list">
-      <p class="title">Language</p>
-      <a href="../pages/movie-list.html" menu-close class="sidebar-link"
-        >English</a
-      >
-      <a href="../pages/movie-list.html" menu-close class="sidebar-link"
-        >Hindi</a
-      >
-      <a href="../pages/movie-list.html" menu-close class="sidebar-link"
-        >Bengali</a
-      >
-    </div>
     
     <div class="sidebar-footer">
       <img
