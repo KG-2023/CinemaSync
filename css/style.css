@@ -59,18 +59,18 @@
 }
 
 .light-theme {
-  --background: #FFD580;
-  --banner-background: #80FF95;
+  --background: #9ad1f8;
+  --banner-background: #474545;
   --white-alpha-20: #80AAFF;
-  --on-background: rgb(10, 1, 1);
-  --on-surface: rgb(10, 1, 1);
-  --on-surface-variant: hsla(250, 1%, 44%, 1);
-  --primary: #FF80E9;
-  --primary-variant: #FF80E9;
-  --rating-color: #FFD580;
-  --surface: #80FF95;
-  --text-color: #80AAFF;
-  --white: #80AAFF;
+  --on-background: rgb(58, 56, 56);
+  --on-surface: rgb(245, 242, 242);
+  --on-surface-variant: rgb(0, 0, 0);
+  --primary: #80ffc0;
+  --primary-variant: #ada4ab;
+  --rating-color: #0b106d;
+  --surface: #4c8fbe;
+  --text-color: #ffffff;
+  --white: #ffffff;
 }
 /*-----------------------------------*\
   #RESET
@@ -369,13 +369,15 @@ body {
   flex-grow: 1;
 }
 .search-field {
-  background-color: var(--banner-background);
+  background-color: transparent;
   height: 48px;
   line-height: 48px;
   padding-inline: 44px 16px;
   outline: none;
   border-radius: var(--radius-8);
   transition: var(--transition-short);
+  box-shadow: 0 0 0 2px var(--on-surface-variant);
+
 }
 .search-field::placeholder {
   color: var(--on-surface-variant);
