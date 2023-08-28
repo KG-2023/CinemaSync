@@ -2,7 +2,7 @@
 
 ## Team 3
  * Lemuel Velez (Coder)
- * Kathleen Borja (Coder)
+ * Kathleen Borja (TeamLead x Coder)
  * Katrina Diaz (Designer)
 
 #Please modify the combination of colors
