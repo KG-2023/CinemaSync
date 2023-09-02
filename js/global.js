@@ -3,17 +3,16 @@
 // ! ========== ADD EVENT ON MULTIPLE ELEMENTS ==========
 
 const addEventOnElements = function (elements, eventType, callback) {
-    elements.forEach((elem) => {
-        elem.addEventListener(eventType, callback);
-    });
-}
+    elements.on(eventType, callback); // Use jQuery .on() method for event binding
+};
 
 // ! ========== TOGGLE SEARCH BOX IN SMALL DEVICES ==========
 
-const searchBox = document.querySelector('[search-box]');
-const searchTogglers = document.querySelectorAll('[search-toggler]');
+const searchBox = $('[search-box]'); // Using jQuery to select the search box element
+const searchTogglers = $('[search-toggler]'); // Using jQuery to select the search togglers
+
 addEventOnElements(searchTogglers, 'click', function () {
-    searchBox.classList.toggle('active');
+    searchBox.toggleClass('active'); // Use jQuery .toggleClass() to toggle the 'active' class
 });
 
 /**

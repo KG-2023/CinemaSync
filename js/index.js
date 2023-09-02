@@ -1,14 +1,14 @@
 'use strict';
 
 /**
- * ! Import all components and functions 
-*/
+ * ! Import all components and functions
+ */
 import { sidebar } from "./sidebar.js";
 import { api_key, imageBaseUrl, fetchDataFromServer } from "./api.js";
 import { createMovieCard } from './movie-card.js';
 import { search } from "./search.js";
 
-const pageContent = document.querySelector('[page-content]');
+const pageContent = $('[page-content]');
 
 sidebar();
 
@@ -29,7 +29,7 @@ const homePageSections = [
         title: "Top Rated Movies",
         path: "/movie/top_rated"
     },
-]
+];
 
 /**
  * ? fetch all genres eg: [ { "id" : "123", "name" : "Action" } ]
@@ -45,7 +45,9 @@ const genreList = {
         let newGenreList = [];
 
         for (const genreId of genreIdList) {
-            this[genreId] && newGenreList.push(this[genreId]); // this = genreList
+            if (this[genreId]) {
+                newGenreList.push(this[genreId]); // this = genreList
+            }
         }
         return newGenreList.join(', ');
     }
@@ -58,23 +60,18 @@ fetchDataFromServer(`https://api.themoviedb.org/3/genre/movie/list?api_key=${api
     fetchDataFromServer(`https://api.themoviedb.org/3/movie/popular?page=1&api_key=${api_key}`, heroBanner);
 });
 
-
-
-
 const heroBanner = function ({ results: movieList }) {
-    const banner = document.createElement('div');
-    banner.className = 'banner';
-    banner.ariaLabel = 'Popular Movies';
-    banner.innerHTML = `
+    const banner = $('<div>').addClass('banner').attr('ariaLabel', 'Popular Movies');
+    banner.html(`
         <div class="banner-slider"></div>
 
         <div class="slider-control">
             <div class="control-inner"></div>
         </div>
-    `;
+    `);
 
     let controlItemIndex = 0;
-    for (const [index, movie] of Object.entries(movieList)) {
+    $.each(movieList, function (index, movie) {
         const {
             backdrop_path,
             title,
@@ -86,10 +83,8 @@ const heroBanner = function ({ results: movieList }) {
             id
         } = movie;
 
-        const sliderItem = document.createElement('div');
-        sliderItem.className = 'slider-item';
-        sliderItem.setAttribute('slider-item', '');
-        sliderItem.innerHTML = `
+        const sliderItem = $('<div>').addClass('slider-item').attr('slider-item', '');
+        sliderItem.html(`
             <img
                 src="${imageBaseUrl}w1280${backdrop_path}"
                 alt="${title}"
@@ -115,13 +110,11 @@ const heroBanner = function ({ results: movieList }) {
                     <span class="span">Watch Now</span>
                 </a>
             </div>
-        `;
-        banner.querySelector('.banner-slider').appendChild(sliderItem);
-        const controlItem = document.createElement('button');
-        controlItem.className = 'poster-box slider-item';
-        controlItem.setAttribute('slider-control', `${controlItemIndex}`);
+        `);
+        banner.find('.banner-slider').append(sliderItem);
+        const controlItem = $('<button>').addClass('poster-box slider-item').attr('slider-control', `${controlItemIndex}`);
         controlItemIndex++;
-        controlItem.innerHTML = `
+        controlItem.html(`
             <img
                 src="${imageBaseUrl}w154${poster_path}"
                 alt="Slide to ${title}"
@@ -129,11 +122,11 @@ const heroBanner = function ({ results: movieList }) {
                 draggable="false"
                 class="img-cover"
             />
-        `;
-        banner.querySelector('.control-inner').appendChild(controlItem);
-    }
+        `);
+        banner.find('.control-inner').append(controlItem);
+    });
 
-    pageContent.appendChild(banner);
+    pageContent.append(banner);
     addHeroSlide();
 
     /**
@@ -143,73 +136,70 @@ const heroBanner = function ({ results: movieList }) {
     for (const { title, path } of homePageSections) {
         fetchDataFromServer(`https://api.themoviedb.org/3${path}?api_key=${api_key}&page=1`, createMovieList, title);
     }
-}
+};
 
 /**
  * ! Hero Slider functionality
-*/
+ */
 const addHeroSlide = function () {
-    const sliderItems = document.querySelectorAll('[slider-item]');
-    const sliderControls = document.querySelectorAll('[slider-control]');
+    const sliderItems = $('[slider-item]');
+    const sliderControls = $('[slider-control]');
 
-    let lastSliderItem = sliderItems[0];
-    let lastSliderControl = sliderControls[0];
+    let lastSliderItem = sliderItems.first();
+    let lastSliderControl = sliderControls.first();
     let currentSliderIndex = 0;
 
-    lastSliderItem.classList.add('active');
-    lastSliderControl.classList.add('active');
+    lastSliderItem.addClass('active');
+    lastSliderControl.addClass('active');
 
     const sliderStart = function () {
-        const controlIndex = Number(this.getAttribute('slider-control'));
+        const controlIndex = Number($(this).attr('slider-control'));
 
         if (currentSliderIndex !== controlIndex) {
-            lastSliderItem.classList.remove('active');
-            lastSliderControl.classList.remove('active');
+            lastSliderItem.removeClass('active');
+            lastSliderControl.removeClass('active');
 
             // Here, 'this' is slider-control
-            sliderItems[controlIndex].classList.add('active');
-            this.classList.add('active');
-            lastSliderItem = sliderItems[controlIndex];
-            lastSliderControl = this;
+            sliderItems.eq(controlIndex).addClass('active');
+            $(this).addClass('active');
+            lastSliderItem = sliderItems.eq(controlIndex);
+            lastSliderControl = $(this);
             currentSliderIndex = controlIndex;
         }
-    }
+    };
 
     const slideToNext = function () {
         const nextIndex = (currentSliderIndex + 1) % sliderItems.length;
-        sliderControls[nextIndex].click();
-    }
+        sliderControls.eq(nextIndex).click();
+    };
 
-    // Automatically sliding in every 7 seconds
+    // Automatically sliding every 7 seconds
     setInterval(slideToNext, 7000);
 
-    addEventOnElements(sliderControls, 'click', sliderStart);
-}
+    sliderControls.on('click', sliderStart);
+};
 
 /**
- * ! Create Movie List 
-*/
-
+ * ! Create Movie List
+ */
 const createMovieList = function ({ results: movieList }, title) {
-    const movieListElem = document.createElement('section');
-    movieListElem.className = 'movie-list';
-    movieListElem.ariaLabel = `${title}`;
+    const movieListElem = $('<section>').addClass('movie-list').attr('ariaLabel', title);
 
-    movieListElem.innerHTML = `
+    movieListElem.html(`
         <div class="title-wrapper">
             <h3 class="title-large">${title}</h3>
         </div>
         <div class="slider-list">
             <div class="slider-inner"></div>
         </div>
-    `;
+    `);
 
-    for (const movie of movieList) {
+    $.each(movieList, function (index, movie) {
         const movieCard = createMovieCard(movie); // called from movie_card.js
-        movieListElem.querySelector('.slider-inner').appendChild(movieCard);
-    }
+        movieListElem.find('.slider-inner').append(movieCard);
+    });
 
-    pageContent.appendChild(movieListElem);
-}
+    pageContent.append(movieListElem);
+};
 
 search();

@@ -11,9 +11,8 @@ export function createMovieCard(movie) {
         id
     } = movie;
 
-    const card = document.createElement('div');
-    card.className = 'movie-card';
-    card.innerHTML = `
+    const card = $('<div>').addClass('movie-card'); // Using jQuery to create a div element with the 'movie-card' class
+    card.html(`
         <figure class="poster-box card-banner">
             <img
                 src="${imageBaseUrl}w342${poster_path}"
@@ -35,13 +34,16 @@ export function createMovieCard(movie) {
             </div>
             <div class="meta-item card-badge">${release_date.split('-')[0]}</div>
         </div>
-        <a
-            href="../pages/detail.html"
-            class="card-btn"
-            title="${title}"
-            onclick="getMovieDetail(${id})"
-        ></a>
-    `;
+    `);
+
+    const cardBtn = $('<a>').addClass('card-btn') // Using jQuery to create an anchor element with the 'card-btn' class
+        .attr('href', '../pages/detail.html')
+        .attr('title', title)
+        .click(function () {
+            getMovieDetail(id); // Using jQuery click event binding
+        });
+
+    card.append(cardBtn); // Appending the cardBtn to the card
 
     return card;
 }

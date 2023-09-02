@@ -10,8 +10,16 @@ const imageBaseUrl = 'https://image.tmdb.org/t/p/';
 */
 
 const fetchDataFromServer = function (url, callback, optionalParam) {
-    fetch(url)
-        .then(response => response.json())
-        .then(data => callback(data, optionalParam));
-}
+    $.ajax({
+        url: url,
+        dataType: 'json',
+        success: function (data) {
+            callback(data, optionalParam);
+        },
+        error: function (xhr, status, error) {
+            console.error('Error fetching data from server:', error);
+        }
+    });
+};
+
 export { imageBaseUrl, api_key, fetchDataFromServer };

@@ -5,10 +5,8 @@ import { sidebar } from "./sidebar.js";
 import { createMovieCard } from "./movie-card.js";
 import { search } from "./search.js";
 
-
 const movieId = window.localStorage.getItem('movieId');
-
-const pageContent = document.querySelector('[page-content]');
+const pageContent = $('[page-content]');
 
 sidebar();
 
@@ -38,7 +36,6 @@ const getDirectors = function (crewList) {
     return directorsList.join(', ');
 }
 
-// return only trailers and teasers as array
 const filterVideos = function (videoList) {
     return videoList.filter(({ type, site }) => (type === 'Trailer' || type === 'Teaser') && (site === 'YouTube'));
 }
@@ -61,9 +58,8 @@ fetchDataFromServer(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api
     } = movie;
 
     document.title = `${title} - Cinema_Sync`;
-    const movieDetail = document.createElement('div');
-    movieDetail.className = 'movie-detail';
-    movieDetail.innerHTML = `
+    const movieDetail = $('<div>').addClass('movie-detail');
+    movieDetail.html(`
         <div
             class="backdrop-image"
             style="background-image: url('${imageBaseUrl}w1280${backdrop_path || poster_path}');"
@@ -101,7 +97,6 @@ fetchDataFromServer(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api
                         <p class="list-name">Starring</p>
                         <p>${getCasts(cast)}</p>
                     </div>
-
                     <div class="list-item">
                         <p class="list-name">Directed By</p>
                         <p>${getDirectors(crew)}</p>
@@ -115,45 +110,38 @@ fetchDataFromServer(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${api
                 <div class="slider-inner"></div>
             </div>
         </div>
-    `;
-
+    `);
 
     for (const { key, name } of filterVideos(videos)) {
-        const videoCard = document.createElement('div');
-        videoCard.className = 'video-card';
-        videoCard.innerHTML = `
+        const videoCard = $('<div>').addClass('video-card');
+        videoCard.html(`
             <iframe width="500" height="294" src="https://www.youtube.com/embed/${key}?&theme=dark&color=white&rel=0" frameborder="0" allowfullscreen="1" title="${name}" class="img-cover" loading="lazy"></iframe>
-        `;
-        movieDetail.querySelector('.slider-inner').appendChild(videoCard);
+        `);
+        movieDetail.find('.slider-inner').append(videoCard);
     }
 
-    pageContent.appendChild(movieDetail);
+    pageContent.append(movieDetail);
 
     fetchDataFromServer(`https://api.themoviedb.org/3/movie/${movieId}/recommendations?page=1&api_key=${api_key}`, addSuggestedMovies);
 });
 
-
 const addSuggestedMovies = function ({ results: movieList }, title) {
-    const movieListElem = document.createElement('section');
-    movieListElem.className = 'movie-list';
-    movieListElem.ariaLabel = 'You May Also Like';
-
-    movieListElem.innerHTML = `
+    const movieListElem = $('<section>').addClass('movie-list').attr('ariaLabel', 'You May Also Like');
+    movieListElem.html(`
         <div class="title-wrapper">
             <h3 class="title-large">You May Also Like</h3>
         </div>
         <div class="slider-list">
             <div class="slider-inner"></div>
         </div>
-    `;
+    `);
 
     for (const movie of movieList) {
         const movieCard = createMovieCard(movie); // called from movie_card.js
-        movieListElem.querySelector('.slider-inner').appendChild(movieCard);
+        movieListElem.find('.slider-inner').append(movieCard);
     }
 
-    pageContent.appendChild(movieListElem);
+    pageContent.append(movieListElem);
 }
 
 search();
-
